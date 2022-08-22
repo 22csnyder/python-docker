@@ -1,15 +1,20 @@
-FROM python:alpine3.16
+FROM python:alpine3.10
+
 
 RUN apk add --update-cache \
-    python \
-    python-dev \
-    py-pip \
+    tmux \
+    git \
+    vim \
     build-base \
     && rm -rf /var/cache/apk/*
 
-RUN pip install -r requirements.txt
+WORKDIR /app
+COPY requirements.txt requirements.txt
+
+RUN pip3 install -r requirements.txt
 
 EXPOSE 8080
 
+COPY . .
 CMD ipython
 
