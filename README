@@ -1,2 +1,4 @@
 first version control for docker image creation
 
+#FROM gliderlabs/alpine:3.3
+#python:alpine3.16
