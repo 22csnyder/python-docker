@@ -1,14 +1,15 @@
-FROM python:slim
+FROM python:alpine3.10
 
-RUN apt-get -y update && apt-get install -y \
+RUN apk add --update-cache \
+#    tmux \
     git \
-    && rm -rf /var/lib/apt/lists/*
-
-#docker build -t sample-image .
+#    vim \
+    cmake
+    build-base \
+    && rm -rf /var/cache/apk/*
 
 WORKDIR /app
 COPY requirements.txt requirements.txt
-#COPY . .
 
 RUN python3 -m pip install --upgrade pip && pip3 install -r requirements.txt
 
@@ -16,10 +17,9 @@ RUN python3 -m pip install --upgrade pip && pip3 install -r requirements.txt
 #ENV LSF_DOCKER_VOLUMES="/storage1/fs1/zaydmanm/Active:/storage1/fs1/zaydmanm/Active"
 ENV HIT='/storage/fs1/zaydmanm/Active/HIT'
 
-#ENV HIT2="$(LSF_DOCKER_VOLUMES)"
-
 
 #EXPOSE 8080
 
+#COPY . .
 CMD ipython #is run if no file to run passed 
 
