@@ -1,0 +1,83 @@
+
+
+#Build Docker
+Generic: 
+  docker build -t your_dockerhub_username/image_name:tag .
+  docker push your_dockerhub_username/image_name:optional_tag
+
+bsub -G compute-workshop -q workshop-interactive -Is -a 'docker_build(username/perl-docker)' -- --tag 1.0.0 perl-docker/
+
+#Run Docker
+Generic: 
+docker pull python:3.10.6-slim 
+docker run -it your_dockerhub_username/image_name:optional_tag command /file_path/file
+
+Generic RIS:
+bsub -Is -q workshop-interactive -a 'docker(your_dockerhub_username/image_name:optional_tag)' command /file_path/file
+
+bsub -Is -G compute-workshop -q workshop-interactive -a 'docker(perl:slim-threaded)' /bin/bash
+bsub -Is -G compute-workshop -q workshop-interactive -a 'docker(${username/perl-docker}:latest)' /bin/bash
+bsub -Is -q general-interactive -G $G -a 'docker(alpine)' echo “hello world”
+
+Note|
+bsub -Is -G compute-zaydmanm -q general-interactive -a 'docker(python:alpine3.16)' /bin/sh
+|bsub -Is -G compute-zaydmanm -q general-interactive -a 'docker(python:alpine3.16)' /bin/sh
+
+------------------------------
+bsub ...
+  -Is Specifies interactive mode
+      (interactive has max run time of 24 hrs) (general has max runtime of 28days)
+  -q specifies a queue
+  -a indicates its an app Specifies the command to run
+  -G specifies a compute group
+
+------------------------------
+
+
+RIS tutorial
+https://docs.ris.wustl.edu/doc/compute/workshops/ris-software-development.html?highlight=visual studio
+
+
+git clone https://github.com/username/perl-docker.git
+Note|on the compute-client machine
+git clone git@github.com:22csnyder/python-docker.git
+
+ssh config file
+
+minimal Dockerfile
+  FROM perl:slim-threaded
+  RUN apt-get update && apt-get install -y --no-install-recommends git && apt-get clean
+
+  git add Dockerfile
+  git add README.md
+  git push
+
+
+build our container directly on Compute1
+
+Generic: docker build -t your_dockerhub_username/image_name:tag .
+bsub -G compute-workshop -q workshop-interactive -Is -a 'docker_build(username/perl-docker)' -- --tag 1.0.0 perl-docker/
+Note|build container 
+Before using this command, we will want to be in the directory that contains our perl-docker directory.
+
+--------
+
+
+bsub -Is -q workshop-interactive -a 'docker(your_dockerhub_username/image_name:optional_tag)' command /file_path/file
+bsub -Is -q workshop-interactive \
+ -a 'docker(your_dockerhub_username/image_name:optional_tag)' \
+ command /file_path/file
+
+
+--------
+docker alone
+
+docker build -t your_dockerhub_username/image_name:tag .
+docker run -it your_dockerhub_username/image_name:optional_tag command /file_path/file
+docker push your_dockerhub_username/image_name:optional_tag
+
+
+"exposes a port and forwards it to inside the docker container "
+"exposes port 8044 to access the application running in the docker container on port 8888"
+LSF_DOCKER_PORTS='8044:8888' 
+LSF == "Load Sharing Facility"

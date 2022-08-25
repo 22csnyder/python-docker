@@ -1,0 +1,6 @@
+ssh config file
+
+Host name-of-ssh-host-here
+    User your-user-name-on-host
+    HostName host-fqdn-or-ip-goes-here
+    IdentityFile ~/.ssh/id_ed25519-remote-ssh

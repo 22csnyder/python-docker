@@ -1,6 +1,5 @@
 FROM python:alpine3.10
 
-
 RUN apk add --update-cache \
     tmux \
     git \
