@@ -1,4 +1,7 @@
 
+
+
+
 #Workflow 
 
 1. login with vstudio
@@ -10,6 +13,12 @@
 
 
 
+
+#debugging alpine
+docker run -it -v "$(pwd)":/python-docker-repo --name testalpine2 python:alpine3.10 /bin/sh
+
+apk update
+apk add make automake gcc g++ subversion python3-dev
 
 
 
