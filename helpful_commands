@@ -18,6 +18,7 @@ Generic:
   docker build -t your_dockerhub_username/image_name:tag .
   docker push your_dockerhub_username/image_name:optional_tag
 
+On RIS Compute1:
 bsub -G compute-workshop -q workshop-interactive -Is -a 'docker_build(username/perl-docker)' -- --tag 1.0.0 perl-docker/
 
 #Run Docker
