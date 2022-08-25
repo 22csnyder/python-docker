@@ -1,4 +1,8 @@
-first version control for docker image creation
+version control for docker image creation
 
 #FROM gliderlabs/alpine:3.3
 #python:alpine3.16
+
+git controls the instructions for building images
+dockerhub just catalogs previous buildings/images by tag
+
