@@ -1,4 +1,17 @@
 
+#Workflow 
+
+1. login with vstudio
+2.0 Build image if not built
+  we will want to be in the directory that contains our perl-docker directory
+  bsub -G compute-workshop -q workshop-interactive -Is -a 'docker_build(username/perl-docker)' -- --tag 1.0.0 perl-docker/
+
+2. bsub 'docker(me/myimage)' (docker pull and docker run)
+
+
+
+
+
 
 #Build Docker
 Generic: 
@@ -8,9 +21,13 @@ Generic:
 bsub -G compute-workshop -q workshop-interactive -Is -a 'docker_build(username/perl-docker)' -- --tag 1.0.0 perl-docker/
 
 #Run Docker
+|bsub -Is -G compute-zaydmanm -q general-interactive -a 'docker(python:alpine3.16)' /bin/sh
+
 Generic: 
+docker run [OPTIONS] IMAGE[:tags] [COMMAND]
 docker pull python:3.10.6-slim 
 docker run -it your_dockerhub_username/image_name:optional_tag command /file_path/file
+docker run -it alpine /bin/sh
 
 Generic RIS:
 bsub -Is -q workshop-interactive -a 'docker(your_dockerhub_username/image_name:optional_tag)' command /file_path/file
@@ -19,9 +36,8 @@ bsub -Is -G compute-workshop -q workshop-interactive -a 'docker(perl:slim-thread
 bsub -Is -G compute-workshop -q workshop-interactive -a 'docker(${username/perl-docker}:latest)' /bin/bash
 bsub -Is -q general-interactive -G $G -a 'docker(alpine)' echo “hello world”
 
-Note|
+Note
 bsub -Is -G compute-zaydmanm -q general-interactive -a 'docker(python:alpine3.16)' /bin/sh
-|bsub -Is -G compute-zaydmanm -q general-interactive -a 'docker(python:alpine3.16)' /bin/sh
 
 ------------------------------
 bsub ...
@@ -81,3 +97,9 @@ docker push your_dockerhub_username/image_name:optional_tag
 "exposes port 8044 to access the application running in the docker container on port 8888"
 LSF_DOCKER_PORTS='8044:8888' 
 LSF == "Load Sharing Facility"
+
+
+Using -it, we can start up an interactive shell process that is listening to the STDIN. The allocated pseudo-terminal will then allow us to send commands to the STDIN of the shell process.
+
+To start a shell process in a running container, we can use the command:
+$ docker exec -it <container-name> /bin/sh
