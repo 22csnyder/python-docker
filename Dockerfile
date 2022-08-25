@@ -1,3 +1,9 @@
+#Notes
+#Worked 8/25
+#docker build -t hitslim0.0 . 
+#docker run -it -v "$(pwd)":/python-docker-repo --name hitenv0.0 hitslim0.0 /bin/bash
+#
+
 FROM python:slim
 
 RUN apt-get -y update && apt-get install -y \
