@@ -3,6 +3,9 @@
 #docker build -t hitslim0.0 . 
 #docker run -it -v "$(pwd)":/python-docker-repo --name hitenv0.0 hitslim0.0 /bin/bash
 #
+#docker tag hitslim0.0 22csnyder/hitslim0.0
+#docker push 22csnyder/hitslim0.0
+#
 
 FROM python:slim
 
