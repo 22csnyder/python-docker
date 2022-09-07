@@ -1,3 +1,10 @@
+Sept 6
+do:
+cd .. #home directory
+./python-docker/bsub.sh
+refresh folders
+
+
 #Notes
 #Worked 8/25
 #docker build -t hitslim0.0 . 

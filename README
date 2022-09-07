@@ -6,3 +6,10 @@ version control for docker image creation
 git controls the instructions for building images
 dockerhub just catalogs previous buildings/images by tag
 
+
+bsub.sh
+-Each Docker project/ branch w/e 
+should have its own bsub.sh, which 
+designates how to run config for 
+that docker image when run with bsub.
+-It should be run from home directory
